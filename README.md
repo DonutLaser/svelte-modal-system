@@ -29,7 +29,7 @@ npm install svelte-modal-system
 
     function openNewModal() {
         const modalRef = openModal(MyModalComponent, { width: '200px', height: '400px' }, { name: 'my modal name property' });
-        modalRef.onClose((result?; any) => {
+        modalRef.onClose((result?: any) => {
             console.log("Modal was closed and here's the result:", result);
         });
     }
