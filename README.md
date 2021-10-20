@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to svelte-modal-system 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version- (0.1.0)-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version- (0.2.0)-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/DonutLaser/svelte-modal-system#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
