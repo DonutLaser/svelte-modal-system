@@ -41,9 +41,14 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<div class="dark-overlay" id="dark-overlay" on:click={handleClick} transition:fade={{ duration: transitionDuration }}>
+<div
+    class="dark-overlay"
+    id="dark-overlay"
+    on:click={handleClick}
+    transition:fade={{ duration: transitionDuration }}
+>
     <div
-        class={options.customWindowClass || "modal"}
+        class={options.customWindowClass || "modal-system-modal"}
         style="width: {options.width}; height: {options.height}"
         transition:fly={{
             duration: transitionDuration,
@@ -72,7 +77,7 @@
         background-color: rgba(0, 0, 0, 0.3);
     }
 
-    .modal {
+    .modal-system-modal {
         background-color: white;
         box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.67);
 
