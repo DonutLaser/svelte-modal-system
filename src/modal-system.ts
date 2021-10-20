@@ -31,7 +31,7 @@ export function openModal(component: any, options?: ModalOptions, componentProps
         intro: true,
     });
 
-    modal.$on('close', closeActiveModal);
+    modal.$on('close', (event: CustomEvent<any>) => { closeActiveModal(event.detail) });
 
     modalRef = new ModalRef(modal);
 
@@ -41,6 +41,6 @@ export function openModal(component: any, options?: ModalOptions, componentProps
 export function closeActiveModal(artifacts?: any) {
     if (!modalRef) { return; }
 
-    modalRef.close(artifacts);
+    modalRef.close(artifacts)
     modalRef = null;
 }

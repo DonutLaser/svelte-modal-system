@@ -35,7 +35,7 @@
     }
 
     function close() {
-        dispatch("close");
+        dispatch("close", null);
     }
 </script>
 
