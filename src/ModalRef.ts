@@ -10,7 +10,9 @@ export class ModalRef {
 
     close(artifacts?: any) {
         this.modal.$destroy();
-        this.closeCallback(artifacts);
+        if (this.closeCallback) {
+            this.closeCallback(artifacts);
+        }
     }
 
     onClose(callback: Function) {
