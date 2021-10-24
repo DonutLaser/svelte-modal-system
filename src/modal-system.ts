@@ -7,6 +7,9 @@ import ConfirmationModal from './ConfirmationModal.svelte';
 
 let modalRef: ModalRef = null;
 
+// @TODO (!important) add info to readme about openInformationModal
+// @TODO (!important) add info to readme about openConfirmationModal 
+
 function openModalWithComponent(component: any, options: ModalOptions | InformationModalOptions, componentProps?: any) {
     if (modalRef) {
         console.error("A modal is already open.");
