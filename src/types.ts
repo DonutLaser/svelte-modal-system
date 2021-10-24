@@ -7,3 +7,10 @@ export interface ModalOptions {
     animate?: boolean;
     openInCenter?: boolean;
 }
+
+export interface InformationModalOptions extends ModalOptions {
+    okButtonName?: string;
+    okButtonClass?: string;
+    message: string;
+}
+}

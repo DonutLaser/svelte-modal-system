@@ -20,7 +20,7 @@
 
         const target = event.target as HTMLElement;
         if (target.id === "dark-overlay") {
-            close();
+            close(null);
         }
     }
 
@@ -30,12 +30,12 @@
         }
 
         if (event.key === "Escape") {
-            close();
+            close(null);
         }
     }
 
-    function close() {
-        dispatch("close", null);
+    function close(data: any) {
+        dispatch("close", data);
     }
 </script>
 
@@ -59,7 +59,7 @@
             easing: cubicInOut,
         }}
     >
-        <svelte:component this={component} {...componentProps} />
+        <svelte:component this={component} {...componentProps} on:close={close} />
     </div>
 </div>
 
