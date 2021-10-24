@@ -59,7 +59,7 @@
             easing: cubicInOut,
         }}
     >
-        <svelte:component this={component} {...componentProps} on:close={close} />
+        <svelte:component this={component} {...componentProps} on:close />
     </div>
 </div>
 

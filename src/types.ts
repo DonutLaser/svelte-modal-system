@@ -13,4 +13,11 @@ export interface InformationModalOptions extends ModalOptions {
     okButtonClass?: string;
     message: string;
 }
+
+export interface ConfirmationModalOptions extends ModalOptions {
+    confirmButtonName?: string;
+    cancelButtonName?: string;
+    confirmButtonClass?: string;
+    cancelButtonClass?: string;
+    message: string;
 }
