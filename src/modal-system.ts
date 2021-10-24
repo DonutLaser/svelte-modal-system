@@ -18,6 +18,7 @@ export function openModal(component: any, options?: ModalOptions, componentProps
         closeOnOutsideClick: true,
         closeWithEscape: true,
         animate: true,
+        openInCenter: true,
     };
     modalOptions = { ...modalOptions, ...options };
 

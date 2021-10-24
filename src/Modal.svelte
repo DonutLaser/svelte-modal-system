@@ -43,6 +43,8 @@
 
 <div
     class="dark-overlay"
+    class:center-children={options.openInCenter}
+    class:top-children={!options.openInCenter}
     id="dark-overlay"
     on:click={handleClick}
     transition:fade={{ duration: transitionDuration }}
@@ -65,7 +67,6 @@
     .dark-overlay {
         display: flex;
         justify-content: center;
-        align-items: center;
 
         width: 100%;
         height: 100%;
@@ -75,6 +76,16 @@
         left: 0;
 
         background-color: rgba(0, 0, 0, 0.3);
+
+        padding: 1rem;
+    }
+
+    .dark-overlay.center-children {
+        align-items: center;
+    }
+
+    .dark-overlay.top-children {
+        align-items: flex-start;
     }
 
     .modal-system-modal {

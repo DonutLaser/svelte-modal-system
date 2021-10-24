@@ -5,4 +5,5 @@ export interface ModalOptions {
     closeWithEscape?: boolean;
     closeOnOutsideClick?: boolean;
     animate?: boolean;
+    openInCenter?: boolean;
 }
