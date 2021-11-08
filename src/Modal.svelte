@@ -75,6 +75,8 @@
         left: 0;
 
         background-color: rgba(0, 0, 0, 0.3);
+
+        z-index: 1000;
     }
 
     .modal-system-modal {
@@ -82,5 +84,7 @@
         box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.67);
 
         border-radius: 0.4rem;
+
+        z-index: 2000;
     }
 </style>
