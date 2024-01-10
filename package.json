@@ -2,6 +2,13 @@
   "name": "@depaper/svelte-modal-system",
   "version": "0.3.0",
   "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "validate": "svelte-check",
+    "bumpVersion": "npm version patch -m \"Bump version to %s\"",
+    "deploy": "npm publish"
+  },
   "module": "dist/index.mjs",
   "main": "dist/index.umd.js",
   "exports": {
@@ -10,22 +17,18 @@
       "svelte": "./dist/index.js"
     }
   },
-  "author": "DePaper",
-  "license": "ISC",
-  "homepage": "https://github.com/DePaper/SvelteModalSystem",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DePaper/SvelteModalSystem.git"
   },
+  "author": "",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/DePaper/SvelteModalSystem/issues"
   },
-  "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "validate": "svelte-check",
-    "bumpVersion": "npm version patch -m \"Bump version to %s\"",
-    "deploy": "npm publish"
+  "homepage": "https://github.com/DePaper/SvelteModalSystem",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "files": [
     "src",
