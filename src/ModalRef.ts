@@ -1,17 +1,20 @@
-import type Modal from './../Modal.svelte';
+import type Modal from './Modal.svelte';
 
 export class ModalRef {
-    private modal: Modal = null;
-    private closeCallback: Function = null;
+    private modal: Modal | null = null;
+    private closeCallback: Function | null = null;
 
     constructor(modal: Modal) {
         this.modal = modal;
     }
 
     close(artifacts?: any) {
-        this.modal.$destroy();
-        if (this.closeCallback) {
-            this.closeCallback(artifacts);
+        if (this.modal) {
+            this.modal.$destroy();
+
+            if (this.closeCallback) {
+                this.closeCallback(artifacts);
+            }
         }
     }
 

@@ -1,46 +1,54 @@
 {
-  "name": "svelte-modal-system",
-  "svelte": "dist/index.js",
-  "module": "dist/index.mjs",
-  "main": "dist/index.umd.js",
-  "types": "dist/ts/index.d.ts",
+  "name": "@depaper/svelte-modal-system",
   "version": "0.3.0",
-  "author": "Vidmantas Luneckas",
-  "license": "MIT",
-  "homepage": "https://github.com/DonutLaser/svelte-modal-system",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DonutLaser/svelte-modal-system.git"
-  },
-  "bugs": {
-    "url": "https://github.com/DonutLaser/svelte-modal-system/issues"
-  },
+  "type": "module",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "validate": "svelte-check",
-    "prepublishOnly": "npm run build"
+    "bumpVersion": "npm version patch -m \"Bump version to %s\"",
+    "deploy": "npm publish"
+  },
+  "module": "dist/index.mjs",
+  "main": "dist/index.umd.js",
+  "exports": {
+    ".": {
+      "types": "./dist/ts/index.d.ts",
+      "svelte": "./dist/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DePaper/SvelteModalSystem.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DePaper/SvelteModalSystem/issues"
+  },
+  "homepage": "https://github.com/DePaper/SvelteModalSystem",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "files": [
     "src",
     "dist"
   ],
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^9.0.0",
-    "@rollup/plugin-typescript": "^6.0.0",
-    "@tsconfig/svelte": "^1.0.10",
-    "fs-extra": "^9.0.1",
-    "glob": "^7.1.6",
-    "rollup": "^2.32.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@tsconfig/svelte": "^5.0.2",
+    "fs-extra": "^11.2.0",
+    "glob": "^10.3.10",
+    "rollup": "^4.9.4",
     "rollup-plugin-execute": "^1.1.1",
-    "rollup-plugin-filesize": "^9.0.2",
-    "rollup-plugin-svelte": "^6.0.1",
-    "rollup-plugin-terser": "^7.0.2",
-    "svelte": "^3.24.0",
-    "svelte-check": "^1.0.60",
-    "svelte-preprocess": "^4.5.1",
-    "tslib": "^2.0.3",
-    "typescript": "^4.0.3"
+    "rollup-plugin-filesize": "^10.0.0",
+    "rollup-plugin-svelte": "^7.1.6",
+    "svelte": "^4.2.8",
+    "svelte-check": "^3.6.2",
+    "svelte-preprocess": "^5.1.3",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
   },
   "keywords": [
     "svelte",

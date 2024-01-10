@@ -3,7 +3,7 @@ import { ModalRef } from './ModalRef';
 
 import Modal from './Modal.svelte';
 
-let modalRef: ModalRef = null;
+let modalRef: ModalRef | null = null;
 
 export function openModal(component: any, options?: ModalOptions, componentProps?: any) {
     if (modalRef) {
