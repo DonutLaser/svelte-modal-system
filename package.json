@@ -1,19 +1,19 @@
 {
-  "name": "svelte-modal-system",
+  "name": "@depaper/svelte-modal-system",
   "svelte": "dist/index.js",
   "module": "dist/index.mjs",
   "main": "dist/index.umd.js",
   "types": "dist/ts/index.d.ts",
   "version": "0.3.0",
-  "author": "Vidmantas Luneckas",
+  "author": "DePaper",
   "license": "MIT",
-  "homepage": "https://github.com/DonutLaser/svelte-modal-system",
+  "homepage": "https://github.com/DePaper/SvelteModalSystem",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DonutLaser/svelte-modal-system.git"
+    "url": "git+https://github.com/DePaper/SvelteModalSystem.git"
   },
   "bugs": {
-    "url": "https://github.com/DonutLaser/svelte-modal-system/issues"
+    "url": "https://github.com/DePaper/SvelteModalSystem/issues"
   },
   "scripts": {
     "build": "rollup -c",
