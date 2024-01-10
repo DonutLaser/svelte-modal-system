@@ -3,7 +3,10 @@
   "compilerOptions": {
     "sourceMap": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "types": [
+      "svelte"
+    ]
   },
   "include": [
     "src/**/*"
