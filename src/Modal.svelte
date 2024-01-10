@@ -41,6 +41,8 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
     class="dark-overlay"
     id="dark-overlay"
