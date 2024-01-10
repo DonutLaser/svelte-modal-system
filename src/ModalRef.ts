@@ -1,4 +1,4 @@
-import type Modal from './../Modal.svelte';
+import type Modal from './Modal.svelte';
 
 export class ModalRef {
     private modal: Modal = null;
