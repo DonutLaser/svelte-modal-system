@@ -1,12 +1,18 @@
-const fs = require("fs-extra");
-const glob = require("glob");
-const path = require("path");
-const svelte = require("svelte/compiler");
-const sveltePreprocess = require("svelte-preprocess");
+import fs from 'fs-extra';
+import { glob } from 'glob';
+import path from 'path';
+import {preprocess} from 'svelte/compiler';
+import sveltePreprocess from 'svelte-preprocess';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 const basePath = path.resolve(__dirname, "../");
 const srcPath = path.resolve(basePath, "src");
 const distPath = path.resolve(basePath, "dist");
+const tsPath = path.join(distPath, "ts");
 
 /**
  * This will process .svelte files into plain javascript so consumers do not have to setup Typescript to use this library
@@ -14,30 +20,23 @@ const distPath = path.resolve(basePath, "dist");
  * Additionally, it will move the .d.ts files into /dist/ts
  */
 async function main() {
-  // get all .svelte files
-  glob(path.join(srcPath, "**/*.svelte"), null, async function (err, files) {
-    if (err) throw err;
-    // process them
-    await Promise.all(files.map((filePath) => preprocessSvelte(path.resolve(filePath))));
-  });
+  // --- Get all .svelte files and preprocess them ---
+  const svelteFiles = await glob(path.join(srcPath, "**/*.svelte"), { ignore: 'node_modules/**', windowsPathsNoEscape:true});
+  await Promise.all(svelteFiles.map((filePath) => preprocessSvelte(path.resolve(filePath))))
 
-  // move .d.ts files into /dist/ts
-  glob(path.join(distPath, "**/*.d.ts"), null, async function (err, files) {
-    if (err) throw err;
-    const tsPath = path.join(distPath, "ts");
-
-    await Promise.all(
-      files.map(async (filePath) => {
-        filePath = path.resolve(filePath);
-        // ignore anything in /dist/ts (could probably make a better glob pattern)
-        if (!filePath.includes(tsPath)) {
-          await fs.move(filePath, filePath.replace(distPath, tsPath), {
-            overwrite: true,
-          });
-        }
-      })
-    );
-  });
+  // --- Move .d.ts files into /dist/ts ---
+  const dtsFiles = await glob(path.join(distPath, "**/*.d.ts"), { ignore: 'node_modules/**', windowsPathsNoEscape:true})
+  await Promise.all(
+    dtsFiles.map(async (filePath) => {
+      filePath = path.resolve(filePath)
+      // Ignore anything in /dist/ts (could probably make a better glob pattern)
+      if (!filePath.includes(tsPath)) { 
+        await fs.move(filePath, filePath.replace(distPath, tsPath), {
+          overwrite: true,
+        });
+      }
+    })
+  )
 }
 
 /**
@@ -45,7 +44,7 @@ async function main() {
  */
 async function preprocessSvelte(filePath) {
   const srcCode = await fs.readFile(filePath, { encoding: "utf-8" });
-  let { code } = await svelte.preprocess(
+  let { code } = await preprocess(
     srcCode,
     sveltePreprocess({
       // unfortunately, sourcemap on .svelte files sometimes comments out the </script> tag
