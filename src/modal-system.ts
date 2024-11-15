@@ -1,6 +1,7 @@
-import type { ModalOptions } from './types';
 import { ModalRef } from './ModalRef';
+import type { ModalOptions } from './types';
 
+import { mount, type Component } from "svelte";
 import Modal from './Modal.svelte';
 
 let modalRef: ModalRef | null = null;
@@ -25,15 +26,13 @@ export function openModal(component: any, options?: ModalOptions, componentProps
     props.options = modalOptions;
     if (componentProps) { props.componentProps = componentProps; }
 
-    const modal = new Modal({
+    const modal = mount(Modal, {
         target: document.body,
         props,
         intro: true,
     });
 
-    modal.$on('close', (event: CustomEvent<any>) => { closeActiveModal(event.detail) });
-
-    modalRef = new ModalRef(modal);
+    modalRef = new ModalRef(modal as Component);
 
     return modalRef;
 }
