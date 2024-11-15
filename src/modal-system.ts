@@ -18,7 +18,7 @@ export function openModal(component: any, options?: ModalOptions, componentProps
         customWindowClass: '',
         closeOnOutsideClick: true,
         closeWithEscape: true,
-        animate: true,
+        animate: false
     };
     modalOptions = { ...modalOptions, ...options };
 
@@ -29,7 +29,7 @@ export function openModal(component: any, options?: ModalOptions, componentProps
     const modal = mount(Modal, {
         target: document.body,
         props,
-        intro: true,
+        intro: true
     });
 
     modalRef = new ModalRef(modal as Component);
