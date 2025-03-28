@@ -14,22 +14,38 @@
 
     let { component, options = {}, componentProps = {} }: Props = $props();
 
+    let outsideClickStartedOnOverlay = false;
+
     let transitionDuration = $derived(options?.animate ? 350 : 0);
     const SvelteComponent = $derived(component);
 
     // ================== FUNCTIONS ==================
-    function handleClick(event: MouseEvent) {
+    function onMouseDown(event: MouseEvent): void {
         if (!options.closeOnOutsideClick) {
             return;
         }
 
         const target = event.target as HTMLElement;
         if (target.id === 'dark-overlay') {
+            // We do this to prevent click that started in the modal from closing the modal accidentally when
+            // it ends outside the modal.
+            outsideClickStartedOnOverlay = true;
+        }
+    }
+
+    function handleClick(event: MouseEvent): void {
+        if (!options.closeOnOutsideClick) {
+            return;
+        }
+
+        const target = event.target as HTMLElement;
+        if (target.id === 'dark-overlay' && outsideClickStartedOnOverlay) {
+            outsideClickStartedOnOverlay = false;
             close();
         }
     }
 
-    function handleKeydown(event: KeyboardEvent) {
+    function handleKeydown(event: KeyboardEvent): void {
         if (!options.closeWithEscape) {
             return;
         }
@@ -39,7 +55,7 @@
         }
     }
 
-    function close() {
+    function close(): void {
         closeActiveModal(null);
     }
 </script>
@@ -51,6 +67,7 @@
 <div
     class="dark-overlay"
     id="dark-overlay"
+    onmousedown={onMouseDown}
     onclick={handleClick}
     transition:fade={{ duration: transitionDuration }}
 >
