@@ -1,8 +1,17 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
-    "sourceMap": true
+    "sourceMap": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "types": [
+      "svelte"
+    ]
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules/*"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules/*"
+  ],
 }

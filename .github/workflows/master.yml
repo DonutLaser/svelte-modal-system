@@ -1,0 +1,48 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    timeout-minutes: 10
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          registry-url: https://npm.pkg.github.com
+          scope: '@depaper'
+      - name: setup commiter
+        run: |
+          git config user.email "${{ github.event.head_commit.author.email }}"
+          git config user.name "${{ github.event.head_commit.author.name }}"
+      - name: npm install, build
+        run: |
+          npm ci
+          npm run build --if-present
+          npm run bumpVersion
+          git push
+        env:
+          CI: true
+          NODE_ENV: test
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+      - name: deploy
+        run: npm run deploy
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: notify on failure
+        uses: homoluctus/slatify@master
+        if: failure()
+        with:
+          type: failure
+          job_name: "SvelteModalSystem package push"
+          channel: "#va-errors"
+          url: ${{ secrets.SLACK_WEBHOOK }}

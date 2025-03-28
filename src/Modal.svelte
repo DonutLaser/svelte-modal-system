@@ -1,54 +1,78 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
-    const dispatch = createEventDispatcher();
-    import type { ModalOptions } from "./types";
-    import { fly, fade } from "svelte/transition";
-    import { cubicInOut } from "svelte/easing";
+    import type { Component } from 'svelte';
+    import { cubicInOut } from 'svelte/easing';
+    import { fade, fly } from 'svelte/transition';
+    import { closeActiveModal } from './modal-system';
+    import type { ModalOptions } from './types';
 
     // ================== VARIABLES ==================
-    export let component: any = null;
-    export let options: ModalOptions = {};
-    export let componentProps: any = {};
+    interface Props {
+        component?: Component;
+        options?: ModalOptions;
+        componentProps?: any;
+    }
 
-    $: transitionDuration = options?.animate ? 350 : 0;
+    let { component, options = {}, componentProps = {} }: Props = $props();
+
+    let outsideClickStartedOnOverlay = false;
+
+    let transitionDuration = $derived(options?.animate ? 350 : 0);
+    const SvelteComponent = $derived(component);
 
     // ================== FUNCTIONS ==================
-    function handleClick(event: MouseEvent) {
+    function onMouseDown(event: MouseEvent): void {
         if (!options.closeOnOutsideClick) {
             return;
         }
 
         const target = event.target as HTMLElement;
-        if (target.id === "dark-overlay") {
+        if (target.id === 'dark-overlay') {
+            // We do this to prevent click that started in the modal from closing the modal accidentally when
+            // it ends outside the modal.
+            outsideClickStartedOnOverlay = true;
+        }
+    }
+
+    function handleClick(event: MouseEvent): void {
+        if (!options.closeOnOutsideClick) {
+            return;
+        }
+
+        const target = event.target as HTMLElement;
+        if (target.id === 'dark-overlay' && outsideClickStartedOnOverlay) {
+            outsideClickStartedOnOverlay = false;
             close();
         }
     }
 
-    function handleKeydown(event: KeyboardEvent) {
+    function handleKeydown(event: KeyboardEvent): void {
         if (!options.closeWithEscape) {
             return;
         }
 
-        if (event.key === "Escape") {
+        if (event.key === 'Escape') {
             close();
         }
     }
 
-    function close() {
-        dispatch("close", null);
+    function close(): void {
+        closeActiveModal(null);
     }
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
+<svelte:window onkeydown={handleKeydown} />
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
     class="dark-overlay"
     id="dark-overlay"
-    on:click={handleClick}
+    onmousedown={onMouseDown}
+    onclick={handleClick}
     transition:fade={{ duration: transitionDuration }}
 >
     <div
-        class={options.customWindowClass || "modal-system-modal"}
+        class={options.customWindowClass || 'modal-system-modal'}
         style="width: {options.width}; height: {options.height}"
         transition:fly={{
             duration: transitionDuration,
@@ -57,7 +81,7 @@
             easing: cubicInOut,
         }}
     >
-        <svelte:component this={component} {...componentProps} />
+        <SvelteComponent {...componentProps}></SvelteComponent>
     </div>
 </div>
 
