@@ -1,6 +1,6 @@
 {
   "name": "@depaper/svelte-modal-system",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "type": "module",
   "description": "Package that provides a svelte modal implementation",
   "scripts": {
@@ -15,7 +15,10 @@
   "types": "dist/ts/index.d.ts",
   "exports": {
     ".": {
-      "svelte": "./dist/index.js"
+      "types": "./dist/ts/index.d.ts",
+      "svelte": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
     }
   },
   "repository": {

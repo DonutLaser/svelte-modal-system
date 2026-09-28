@@ -18,7 +18,8 @@ export function openModal(component: any, options?: ModalOptions, componentProps
         customWindowClass: '',
         closeOnOutsideClick: true,
         closeWithEscape: true,
-        animate: false
+        animate: false,
+        draggable: false
     };
     modalOptions = { ...modalOptions, ...options };
 

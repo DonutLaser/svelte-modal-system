@@ -61,6 +61,7 @@ All of these are optional.
 | **animate**             | boolean | true          | Whether to play an animation when the modal is opened                                                                     |
 | **closeWithEscape**     | boolean | true          | Whether to allow closing a modal by pressing `Escape`                                                                     |
 | **closeOnOutsideClick** | boolean | true          | Whether to allow closing the modal by clicking outside it.                                                                |
+| **draggable**           | boolean | false         | Whether to allow dragging the modal by its top area (~30px).                                                              |
 
 ### Component props
 You can easily provide the properties for your modal component by passing in an object to `openModal` function.
